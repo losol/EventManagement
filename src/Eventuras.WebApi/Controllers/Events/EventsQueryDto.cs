@@ -14,6 +14,9 @@ namespace Eventuras.WebApi.Controllers.Events
         public PeriodMatchingKind Period { get; set; } = PeriodMatchingKind.Match;
 
         [Range(1, int.MaxValue)]
+        public int? CollectionId { get; set; }
+
+        [Range(1, int.MaxValue)]
         public int? OrganizationId { get; set; }
 
         public EventInfoFilter ToEventInfoFilter()
@@ -28,6 +31,11 @@ namespace Eventuras.WebApi.Controllers.Events
                 OrganizationId = OrganizationId,
                 AccessibleOnly = false
             };
+
+            if (CollectionId.HasValue) 
+            {
+                filter.CollectionIds = new int[CollectionId.Value];
+            }
 
             if (!Start.HasValue && !End.HasValue)
             {
