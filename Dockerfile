@@ -27,7 +27,7 @@ RUN dotnet restore
 COPY . ./
 
 # Publish
-WORKDIR /app/src/src/Eventuras.Web
+WORKDIR /app/src/src/Eventuras.WebApi
 RUN dotnet publish -c Release -o /app/out
 
 #
@@ -39,4 +39,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS publish
 WORKDIR /app
 COPY --from=build /app/out .
 
-ENTRYPOINT ["dotnet", "Eventuras.Web.dll"]
+ENTRYPOINT ["dotnet", "Eventuras.WebApi.dll"]

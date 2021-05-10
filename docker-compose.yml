@@ -11,6 +11,16 @@ services:
       db:
         condition: service_healthy
 
+  api:
+    image: losolio/eventuras:api
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=db;Database=eventuras_db;Username=eventuras;Password=Str0ng!Pasword"
+    ports:
+      - "5101:80"
+    depends_on:
+      db:
+        condition: service_healthy
+
   db:
     container_name: eventuras_db
     image: postgres
