@@ -1,0 +1,47 @@
+get:
+  summary: Get organizations list (system admin only).
+  operationId: getOrganizationsList
+  tags:
+    - organizations
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '../schemas/organizations/OrganizationDto.yaml'
+    '400':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/InvalidRequestError'
+    '401':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/UnauthorizedError'
+    '500':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/InternalServerError'
+
+post:
+  summary: Create new organization (system admin only).
+  operationId: createNewOrganization
+  tags:
+    - organizations
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../schemas/organizations/OrganizationFormDto.yaml'
+  responses:
+    '200':
+      description: OK
+      content:
+        application/json:
+          schema:
+            $ref: '../schemas/organizations/OrganizationDto.yaml'
+    '400':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/InvalidRequestError'
+    '401':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/UnauthorizedError'
+    '403':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/ForbiddenError'
+    '500':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/InternalServerError'

@@ -1379,6 +1379,73 @@ ul.nav-tabs {
     "quantity" : 1
   }
 };
+    defs["OrganizationDto"] = {
+  "title" : "Organization properties.",
+  "required" : [ "name" ],
+  "type" : "object",
+  "properties" : {
+    "organizationId" : {
+      "type" : "integer",
+      "description" : "Organization ID.",
+      "format" : "int32"
+    },
+    "name" : {
+      "type" : "string"
+    },
+    "description" : {
+      "type" : "string"
+    },
+    "url" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "logoUrl" : {
+      "type" : "string"
+    },
+    "løogoBase64" : {
+      "type" : "string"
+    }
+  },
+  "example" : {
+    "name" : "Test org"
+  }
+};
+    defs["OrganizationFormDto"] = {
+  "title" : "Organization data.",
+  "required" : [ "name" ],
+  "type" : "object",
+  "properties" : {
+    "name" : {
+      "type" : "string"
+    },
+    "description" : {
+      "type" : "string"
+    },
+    "url" : {
+      "type" : "string"
+    },
+    "phone" : {
+      "type" : "string"
+    },
+    "email" : {
+      "type" : "string"
+    },
+    "logoUrl" : {
+      "type" : "string"
+    },
+    "løogoBase64" : {
+      "type" : "string"
+    }
+  },
+  "example" : {
+    "name" : "Test org"
+  }
+};
     defs["OrganizationSettingDto"] = {
   "title" : "Organization setting properties.",
   "required" : [ "description", "name", "section", "type" ],
@@ -1890,17 +1957,29 @@ ul.nav-tabs {
                     <li data-group="Organizations" data-name="addOrganizationMemberRole" class="">
                       <a href="#api-Organizations-addOrganizationMemberRole">addOrganizationMemberRole</a>
                     </li>
+                    <li data-group="Organizations" data-name="createNewOrganization" class="">
+                      <a href="#api-Organizations-createNewOrganization">createNewOrganization</a>
+                    </li>
+                    <li data-group="Organizations" data-name="deleteOrganization" class="">
+                      <a href="#api-Organizations-deleteOrganization">deleteOrganization</a>
+                    </li>
                     <li data-group="Organizations" data-name="getOrganizationMemberRoles" class="">
                       <a href="#api-Organizations-getOrganizationMemberRoles">getOrganizationMemberRoles</a>
                     </li>
                     <li data-group="Organizations" data-name="getOrganizationSettingsList" class="">
                       <a href="#api-Organizations-getOrganizationSettingsList">getOrganizationSettingsList</a>
                     </li>
+                    <li data-group="Organizations" data-name="getOrganizationsList" class="">
+                      <a href="#api-Organizations-getOrganizationsList">getOrganizationsList</a>
+                    </li>
                     <li data-group="Organizations" data-name="removeMemberFromOrganization" class="">
                       <a href="#api-Organizations-removeMemberFromOrganization">removeMemberFromOrganization</a>
                     </li>
                     <li data-group="Organizations" data-name="removeMemberFromOrganization_1" class="">
                       <a href="#api-Organizations-removeMemberFromOrganization_1">removeMemberFromOrganization_1</a>
+                    </li>
+                    <li data-group="Organizations" data-name="updateOrganization" class="">
+                      <a href="#api-Organizations-updateOrganization">updateOrganization</a>
                     </li>
                     <li data-group="Organizations" data-name="updateOrganizationSettings" class="">
                       <a href="#api-Organizations-updateOrganizationSettings">updateOrganizationSettings</a>
@@ -12436,6 +12515,1231 @@ $(document).ready(function() {
                         </article>
                       </div>
                       <hr>
+                    <div id="api-Organizations-createNewOrganization">
+                      <article id="api-Organizations-createNewOrganization-0" data-group="User" data-name="createNewOrganization" data-version="0">
+                        <div class="pull-left">
+                          <h1>createNewOrganization</h1>
+                          <p>Create new organization (system admin only).</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/organizations</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Organizations-createNewOrganization-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-createNewOrganization-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-createNewOrganization-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Organizations-createNewOrganization-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Organizations-createNewOrganization-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+ -H "Authorization: Bearer [[accessToken]]"\
+ -H "Accept: application/json"\
+ -H "Content-Type: application/json"\
+ "https://full.path.to/v3/organizations"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.OrganizationsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure Bearer (JWT) access token for authorization: bearer
+        HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
+        bearer.setBearerToken("BEARER TOKEN");
+        
+        // Create an instance of the API class
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        OrganizationFormDto organizationFormDto = ; // OrganizationFormDto | 
+        
+        try {
+            OrganizationDto result = apiInstance.createNewOrganization(organizationFormDto);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#createNewOrganization");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.OrganizationsApi;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        OrganizationFormDto organizationFormDto = ; // OrganizationFormDto | 
+        
+        try {
+            OrganizationDto result = apiInstance.createNewOrganization(organizationFormDto);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#createNewOrganization");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+
+// Configure Bearer (JWT) access token for authorization: bearer
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+// Create an instance of the API class
+OrganizationsApi *apiInstance = [[OrganizationsApi alloc] init];
+OrganizationFormDto *organizationFormDto = ; // 
+
+// Create new organization (system admin only).
+[apiInstance createNewOrganizationWith:organizationFormDto
+              completionHandler: ^(OrganizationDto output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var EventurasApi = require('eventuras_api');
+var defaultClient = EventurasApi.ApiClient.instance;
+
+// Configure Bearer (JWT) access token for authorization: bearer
+var bearer = defaultClient.authentications['bearer'];
+bearer.accessToken = "YOUR ACCESS TOKEN";
+
+// Create an instance of the API class
+var api = new EventurasApi.OrganizationsApi()
+var organizationFormDto = ; // {OrganizationFormDto} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.createNewOrganization(organizationFormDto, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Organizations-createNewOrganization-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class createNewOrganizationExample
+    {
+        public void main()
+        {
+            // Configure Bearer (JWT) access token for authorization: bearer
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+            
+            // Create an instance of the API class
+            var apiInstance = new OrganizationsApi();
+            var organizationFormDto = new OrganizationFormDto(); // OrganizationFormDto | 
+
+            try {
+                // Create new organization (system admin only).
+                OrganizationDto result = apiInstance.createNewOrganization(organizationFormDto);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling OrganizationsApi.createNewOrganization: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer (JWT) access token for authorization: bearer
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setAccessToken('', 'YOUR_ACCESS_TOKEN');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\OrganizationsApi();
+$organizationFormDto = ; // OrganizationFormDto | 
+
+try {
+    $result = $api_instance->createNewOrganization($organizationFormDto);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrganizationsApi->createNewOrganization: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::OrganizationsApi;
+
+# Configure Bearer (JWT) access token for authorization: bearer
+$WWW::OPenAPIClient::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::OrganizationsApi->new();
+my $organizationFormDto = WWW::OPenAPIClient::Object::OrganizationFormDto->new(); # OrganizationFormDto | 
+
+eval { 
+    my $result = $api_instance->createNewOrganization(organizationFormDto => $organizationFormDto);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling OrganizationsApi->createNewOrganization: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Configure Bearer (JWT) access token for authorization: bearer
+openapi_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Create an instance of the API class
+api_instance = openapi_client.OrganizationsApi()
+organizationFormDto =  # OrganizationFormDto | 
+
+try: 
+    # Create new organization (system admin only).
+    api_response = api_instance.create_new_organization(organizationFormDto)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling OrganizationsApi->createNewOrganization: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-createNewOrganization-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate OrganizationsApi;
+
+pub fn main() {
+    let organizationFormDto = ; // OrganizationFormDto
+
+    let mut context = OrganizationsApi::Context::default();
+    let result = client.createNewOrganization(organizationFormDto, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">organizationFormDto <span style="color:red;">*</span></td>
+<td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/OrganizationFormDto"
+      }
+    }
+  },
+  "required" : true
+};
+
+  var schema = findNode('schema',schemaWrapper).schema;
+  if (!schema) {
+    schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_createNewOrganization_organizationFormDto');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_createNewOrganization_organizationFormDto"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Organizations-createNewOrganization-title-200"></h3>
+                            <p id="examples-Organizations-createNewOrganization-description-200" class="marked"></p>
+                            <script>
+                              var responseOrganizations200_description = `OK`;
+                              var responseOrganizations200_description_break = responseOrganizations200_description.indexOf('\n');
+                              if (responseOrganizations200_description_break == -1) {
+                                $("#examples-Organizations-createNewOrganization-title-200").text("Status: 200 - " + responseOrganizations200_description);
+                              } else {
+                                $("#examples-Organizations-createNewOrganization-title-200").text("Status: 200 - " + responseOrganizations200_description.substring(0, responseOrganizations200_description_break));
+                                $("#examples-Organizations-createNewOrganization-description-200").html(responseOrganizations200_description.substring(responseOrganizations200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-createNewOrganization-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-createNewOrganization-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-createNewOrganization-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-createNewOrganization-200-schema">
+                                  <div id="responses-Organizations-createNewOrganization-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/OrganizationDto"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-createNewOrganization-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-createNewOrganization-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-createNewOrganization-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-createNewOrganization-title-400"></h3>
+                            <p id="examples-Organizations-createNewOrganization-description-400" class="marked"></p>
+                            <script>
+                              var responseOrganizations400_description = `Missing or invalid request parameters.`;
+                              var responseOrganizations400_description_break = responseOrganizations400_description.indexOf('\n');
+                              if (responseOrganizations400_description_break == -1) {
+                                $("#examples-Organizations-createNewOrganization-title-400").text("Status: 400 - " + responseOrganizations400_description);
+                              } else {
+                                $("#examples-Organizations-createNewOrganization-title-400").text("Status: 400 - " + responseOrganizations400_description.substring(0, responseOrganizations400_description_break));
+                                $("#examples-Organizations-createNewOrganization-description-400").html(responseOrganizations400_description.substring(responseOrganizations400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-createNewOrganization-400" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-createNewOrganization-400-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-createNewOrganization-400-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-createNewOrganization-400-schema">
+                                  <div id="responses-Organizations-createNewOrganization-schema-400" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Missing or invalid request parameters.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-createNewOrganization-400-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-createNewOrganization-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-createNewOrganization-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-createNewOrganization-title-401"></h3>
+                            <p id="examples-Organizations-createNewOrganization-description-401" class="marked"></p>
+                            <script>
+                              var responseOrganizations401_description = `Access token is missing or invalid.`;
+                              var responseOrganizations401_description_break = responseOrganizations401_description.indexOf('\n');
+                              if (responseOrganizations401_description_break == -1) {
+                                $("#examples-Organizations-createNewOrganization-title-401").text("Status: 401 - " + responseOrganizations401_description);
+                              } else {
+                                $("#examples-Organizations-createNewOrganization-title-401").text("Status: 401 - " + responseOrganizations401_description.substring(0, responseOrganizations401_description_break));
+                                $("#examples-Organizations-createNewOrganization-description-401").html(responseOrganizations401_description.substring(responseOrganizations401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-createNewOrganization-401" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-createNewOrganization-401-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-createNewOrganization-401-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-createNewOrganization-401-schema">
+                                  <div id="responses-Organizations-createNewOrganization-schema-401" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Access token is missing or invalid.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-createNewOrganization-401-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-createNewOrganization-schema-401');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-createNewOrganization-401-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-createNewOrganization-title-403"></h3>
+                            <p id="examples-Organizations-createNewOrganization-description-403" class="marked"></p>
+                            <script>
+                              var responseOrganizations403_description = `Access forbidden.`;
+                              var responseOrganizations403_description_break = responseOrganizations403_description.indexOf('\n');
+                              if (responseOrganizations403_description_break == -1) {
+                                $("#examples-Organizations-createNewOrganization-title-403").text("Status: 403 - " + responseOrganizations403_description);
+                              } else {
+                                $("#examples-Organizations-createNewOrganization-title-403").text("Status: 403 - " + responseOrganizations403_description.substring(0, responseOrganizations403_description_break));
+                                $("#examples-Organizations-createNewOrganization-description-403").html(responseOrganizations403_description.substring(responseOrganizations403_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-createNewOrganization-403" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-createNewOrganization-403-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-createNewOrganization-403-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-createNewOrganization-403-schema">
+                                  <div id="responses-Organizations-createNewOrganization-schema-403" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Access forbidden.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-createNewOrganization-403-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-createNewOrganization-schema-403');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-createNewOrganization-403-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-createNewOrganization-title-500"></h3>
+                            <p id="examples-Organizations-createNewOrganization-description-500" class="marked"></p>
+                            <script>
+                              var responseOrganizations500_description = `Unexpected server error.`;
+                              var responseOrganizations500_description_break = responseOrganizations500_description.indexOf('\n');
+                              if (responseOrganizations500_description_break == -1) {
+                                $("#examples-Organizations-createNewOrganization-title-500").text("Status: 500 - " + responseOrganizations500_description);
+                              } else {
+                                $("#examples-Organizations-createNewOrganization-title-500").text("Status: 500 - " + responseOrganizations500_description.substring(0, responseOrganizations500_description_break));
+                                $("#examples-Organizations-createNewOrganization-description-500").html(responseOrganizations500_description.substring(responseOrganizations500_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-createNewOrganization-500" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-createNewOrganization-500-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-createNewOrganization-500-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-createNewOrganization-500-schema">
+                                  <div id="responses-Organizations-createNewOrganization-schema-500" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Unexpected server error.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-createNewOrganization-500-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-createNewOrganization-schema-500');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-createNewOrganization-500-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Organizations-deleteOrganization">
+                      <article id="api-Organizations-deleteOrganization-0" data-group="User" data-name="deleteOrganization" data-version="0">
+                        <div class="pull-left">
+                          <h1>deleteOrganization</h1>
+                          <p>Delete organization (system admin only).</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="delete"><code><span class="pln">/organizations/{id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Organizations-deleteOrganization-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-deleteOrganization-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-deleteOrganization-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Organizations-deleteOrganization-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Organizations-deleteOrganization-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X DELETE\
+ -H "Authorization: Bearer [[accessToken]]"\
+ -H "Accept: application/json"\
+ "https://full.path.to/v3/organizations/{id}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.OrganizationsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure Bearer (JWT) access token for authorization: bearer
+        HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
+        bearer.setBearerToken("BEARER TOKEN");
+        
+        // Create an instance of the API class
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        Integer id = 56; // Integer | Organization ID.
+        
+        try {
+            apiInstance.deleteOrganization(id);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#deleteOrganization");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.OrganizationsApi;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        Integer id = 56; // Integer | Organization ID.
+        
+        try {
+            apiInstance.deleteOrganization(id);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#deleteOrganization");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+
+// Configure Bearer (JWT) access token for authorization: bearer
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+// Create an instance of the API class
+OrganizationsApi *apiInstance = [[OrganizationsApi alloc] init];
+Integer *id = 56; // Organization ID. (default to null)
+
+// Delete organization (system admin only).
+[apiInstance deleteOrganizationWith:id
+              completionHandler: ^(NSError* error) {
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var EventurasApi = require('eventuras_api');
+var defaultClient = EventurasApi.ApiClient.instance;
+
+// Configure Bearer (JWT) access token for authorization: bearer
+var bearer = defaultClient.authentications['bearer'];
+bearer.accessToken = "YOUR ACCESS TOKEN";
+
+// Create an instance of the API class
+var api = new EventurasApi.OrganizationsApi()
+var id = 56; // {Integer} Organization ID.
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully.');
+  }
+};
+api.deleteOrganization(id, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Organizations-deleteOrganization-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class deleteOrganizationExample
+    {
+        public void main()
+        {
+            // Configure Bearer (JWT) access token for authorization: bearer
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+            
+            // Create an instance of the API class
+            var apiInstance = new OrganizationsApi();
+            var id = 56;  // Integer | Organization ID. (default to null)
+
+            try {
+                // Delete organization (system admin only).
+                apiInstance.deleteOrganization(id);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling OrganizationsApi.deleteOrganization: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer (JWT) access token for authorization: bearer
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setAccessToken('', 'YOUR_ACCESS_TOKEN');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\OrganizationsApi();
+$id = 56; // Integer | Organization ID.
+
+try {
+    $api_instance->deleteOrganization($id);
+} catch (Exception $e) {
+    echo 'Exception when calling OrganizationsApi->deleteOrganization: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::OrganizationsApi;
+
+# Configure Bearer (JWT) access token for authorization: bearer
+$WWW::OPenAPIClient::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::OrganizationsApi->new();
+my $id = 56; # Integer | Organization ID.
+
+eval { 
+    $api_instance->deleteOrganization(id => $id);
+};
+if ($@) {
+    warn "Exception when calling OrganizationsApi->deleteOrganization: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Configure Bearer (JWT) access token for authorization: bearer
+openapi_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Create an instance of the API class
+api_instance = openapi_client.OrganizationsApi()
+id = 56 # Integer | Organization ID. (default to null)
+
+try: 
+    # Delete organization (system admin only).
+    api_instance.delete_organization(id)
+except ApiException as e:
+    print("Exception when calling OrganizationsApi->deleteOrganization: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-deleteOrganization-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate OrganizationsApi;
+
+pub fn main() {
+    let id = 56; // Integer
+
+    let mut context = OrganizationsApi::Context::default();
+    let result = client.deleteOrganization(id, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_deleteOrganization_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+                    <span class="format">
+                        (int32)
+                    </span>
+
+                    <div class="inner description marked">
+Organization ID.
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Organizations-deleteOrganization-title-200"></h3>
+                            <p id="examples-Organizations-deleteOrganization-description-200" class="marked"></p>
+                            <script>
+                              var responseOrganizations200_description = `Organization deleted.`;
+                              var responseOrganizations200_description_break = responseOrganizations200_description.indexOf('\n');
+                              if (responseOrganizations200_description_break == -1) {
+                                $("#examples-Organizations-deleteOrganization-title-200").text("Status: 200 - " + responseOrganizations200_description);
+                              } else {
+                                $("#examples-Organizations-deleteOrganization-title-200").text("Status: 200 - " + responseOrganizations200_description.substring(0, responseOrganizations200_description_break));
+                                $("#examples-Organizations-deleteOrganization-description-200").html(responseOrganizations200_description.substring(responseOrganizations200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-deleteOrganization-200" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-deleteOrganization-200-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-Organizations-deleteOrganization-title-401"></h3>
+                            <p id="examples-Organizations-deleteOrganization-description-401" class="marked"></p>
+                            <script>
+                              var responseOrganizations401_description = `Access token is missing or invalid.`;
+                              var responseOrganizations401_description_break = responseOrganizations401_description.indexOf('\n');
+                              if (responseOrganizations401_description_break == -1) {
+                                $("#examples-Organizations-deleteOrganization-title-401").text("Status: 401 - " + responseOrganizations401_description);
+                              } else {
+                                $("#examples-Organizations-deleteOrganization-title-401").text("Status: 401 - " + responseOrganizations401_description.substring(0, responseOrganizations401_description_break));
+                                $("#examples-Organizations-deleteOrganization-description-401").html(responseOrganizations401_description.substring(responseOrganizations401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-deleteOrganization-401" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-deleteOrganization-401-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-deleteOrganization-401-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-deleteOrganization-401-schema">
+                                  <div id="responses-Organizations-deleteOrganization-schema-401" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Access token is missing or invalid.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-deleteOrganization-401-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-deleteOrganization-schema-401');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-deleteOrganization-401-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-deleteOrganization-title-403"></h3>
+                            <p id="examples-Organizations-deleteOrganization-description-403" class="marked"></p>
+                            <script>
+                              var responseOrganizations403_description = `Access forbidden.`;
+                              var responseOrganizations403_description_break = responseOrganizations403_description.indexOf('\n');
+                              if (responseOrganizations403_description_break == -1) {
+                                $("#examples-Organizations-deleteOrganization-title-403").text("Status: 403 - " + responseOrganizations403_description);
+                              } else {
+                                $("#examples-Organizations-deleteOrganization-title-403").text("Status: 403 - " + responseOrganizations403_description.substring(0, responseOrganizations403_description_break));
+                                $("#examples-Organizations-deleteOrganization-description-403").html(responseOrganizations403_description.substring(responseOrganizations403_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-deleteOrganization-403" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-deleteOrganization-403-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-deleteOrganization-403-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-deleteOrganization-403-schema">
+                                  <div id="responses-Organizations-deleteOrganization-schema-403" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Access forbidden.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-deleteOrganization-403-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-deleteOrganization-schema-403');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-deleteOrganization-403-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-deleteOrganization-title-404"></h3>
+                            <p id="examples-Organizations-deleteOrganization-description-404" class="marked"></p>
+                            <script>
+                              var responseOrganizations404_description = `The requested resource not found.`;
+                              var responseOrganizations404_description_break = responseOrganizations404_description.indexOf('\n');
+                              if (responseOrganizations404_description_break == -1) {
+                                $("#examples-Organizations-deleteOrganization-title-404").text("Status: 404 - " + responseOrganizations404_description);
+                              } else {
+                                $("#examples-Organizations-deleteOrganization-title-404").text("Status: 404 - " + responseOrganizations404_description.substring(0, responseOrganizations404_description_break));
+                                $("#examples-Organizations-deleteOrganization-description-404").html(responseOrganizations404_description.substring(responseOrganizations404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-deleteOrganization-404" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-deleteOrganization-404-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-deleteOrganization-404-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-deleteOrganization-404-schema">
+                                  <div id="responses-Organizations-deleteOrganization-schema-404" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "The requested resource not found.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-deleteOrganization-404-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-deleteOrganization-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-deleteOrganization-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-deleteOrganization-title-500"></h3>
+                            <p id="examples-Organizations-deleteOrganization-description-500" class="marked"></p>
+                            <script>
+                              var responseOrganizations500_description = `Unexpected server error.`;
+                              var responseOrganizations500_description_break = responseOrganizations500_description.indexOf('\n');
+                              if (responseOrganizations500_description_break == -1) {
+                                $("#examples-Organizations-deleteOrganization-title-500").text("Status: 500 - " + responseOrganizations500_description);
+                              } else {
+                                $("#examples-Organizations-deleteOrganization-title-500").text("Status: 500 - " + responseOrganizations500_description.substring(0, responseOrganizations500_description_break));
+                                $("#examples-Organizations-deleteOrganization-description-500").html(responseOrganizations500_description.substring(responseOrganizations500_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-deleteOrganization-500" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-deleteOrganization-500-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-deleteOrganization-500-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-deleteOrganization-500-schema">
+                                  <div id="responses-Organizations-deleteOrganization-schema-500" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Unexpected server error.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-deleteOrganization-500-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-deleteOrganization-schema-500');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-deleteOrganization-500-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Organizations-getOrganizationMemberRoles">
                       <article id="api-Organizations-getOrganizationMemberRoles-0" data-group="User" data-name="getOrganizationMemberRoles" data-version="0">
                         <div class="pull-left">
@@ -13589,6 +14893,532 @@ Organization ID.
                                     </script>
                                   </div>
                                   <input id='responses-Organizations-getOrganizationSettingsList-500-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Organizations-getOrganizationsList">
+                      <article id="api-Organizations-getOrganizationsList-0" data-group="User" data-name="getOrganizationsList" data-version="0">
+                        <div class="pull-left">
+                          <h1>getOrganizationsList</h1>
+                          <p>Get organizations list (system admin only).</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/organizations</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Organizations-getOrganizationsList-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-getOrganizationsList-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-getOrganizationsList-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Organizations-getOrganizationsList-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Organizations-getOrganizationsList-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+ -H "Authorization: Bearer [[accessToken]]"\
+ -H "Accept: application/json"\
+ "https://full.path.to/v3/organizations"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.OrganizationsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure Bearer (JWT) access token for authorization: bearer
+        HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
+        bearer.setBearerToken("BEARER TOKEN");
+        
+        // Create an instance of the API class
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        
+        try {
+            array[OrganizationDto] result = apiInstance.getOrganizationsList();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#getOrganizationsList");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.OrganizationsApi;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        
+        try {
+            array[OrganizationDto] result = apiInstance.getOrganizationsList();
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#getOrganizationsList");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+
+// Configure Bearer (JWT) access token for authorization: bearer
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+// Create an instance of the API class
+OrganizationsApi *apiInstance = [[OrganizationsApi alloc] init];
+
+// Get organizations list (system admin only).
+[apiInstance getOrganizationsListWithCompletionHandler: 
+              ^(array[OrganizationDto] output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var EventurasApi = require('eventuras_api');
+var defaultClient = EventurasApi.ApiClient.instance;
+
+// Configure Bearer (JWT) access token for authorization: bearer
+var bearer = defaultClient.authentications['bearer'];
+bearer.accessToken = "YOUR ACCESS TOKEN";
+
+// Create an instance of the API class
+var api = new EventurasApi.OrganizationsApi()
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getOrganizationsList(callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class getOrganizationsListExample
+    {
+        public void main()
+        {
+            // Configure Bearer (JWT) access token for authorization: bearer
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+            
+            // Create an instance of the API class
+            var apiInstance = new OrganizationsApi();
+
+            try {
+                // Get organizations list (system admin only).
+                array[OrganizationDto] result = apiInstance.getOrganizationsList();
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling OrganizationsApi.getOrganizationsList: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer (JWT) access token for authorization: bearer
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setAccessToken('', 'YOUR_ACCESS_TOKEN');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\OrganizationsApi();
+
+try {
+    $result = $api_instance->getOrganizationsList();
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrganizationsApi->getOrganizationsList: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::OrganizationsApi;
+
+# Configure Bearer (JWT) access token for authorization: bearer
+$WWW::OPenAPIClient::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::OrganizationsApi->new();
+
+eval { 
+    my $result = $api_instance->getOrganizationsList();
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling OrganizationsApi->getOrganizationsList: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Configure Bearer (JWT) access token for authorization: bearer
+openapi_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Create an instance of the API class
+api_instance = openapi_client.OrganizationsApi()
+
+try: 
+    # Get organizations list (system admin only).
+    api_response = api_instance.get_organizations_list()
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling OrganizationsApi->getOrganizationsList: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-getOrganizationsList-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate OrganizationsApi;
+
+pub fn main() {
+
+    let mut context = OrganizationsApi::Context::default();
+    let result = client.getOrganizationsList(&context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Organizations-getOrganizationsList-title-200"></h3>
+                            <p id="examples-Organizations-getOrganizationsList-description-200" class="marked"></p>
+                            <script>
+                              var responseOrganizations200_description = `OK`;
+                              var responseOrganizations200_description_break = responseOrganizations200_description.indexOf('\n');
+                              if (responseOrganizations200_description_break == -1) {
+                                $("#examples-Organizations-getOrganizationsList-title-200").text("Status: 200 - " + responseOrganizations200_description);
+                              } else {
+                                $("#examples-Organizations-getOrganizationsList-title-200").text("Status: 200 - " + responseOrganizations200_description.substring(0, responseOrganizations200_description_break));
+                                $("#examples-Organizations-getOrganizationsList-description-200").html(responseOrganizations200_description.substring(responseOrganizations200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-getOrganizationsList-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-getOrganizationsList-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-getOrganizationsList-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-getOrganizationsList-200-schema">
+                                  <div id="responses-Organizations-getOrganizationsList-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "OK",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/components/schemas/OrganizationDto"
+        }
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-getOrganizationsList-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-getOrganizationsList-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-getOrganizationsList-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-getOrganizationsList-title-400"></h3>
+                            <p id="examples-Organizations-getOrganizationsList-description-400" class="marked"></p>
+                            <script>
+                              var responseOrganizations400_description = `Missing or invalid request parameters.`;
+                              var responseOrganizations400_description_break = responseOrganizations400_description.indexOf('\n');
+                              if (responseOrganizations400_description_break == -1) {
+                                $("#examples-Organizations-getOrganizationsList-title-400").text("Status: 400 - " + responseOrganizations400_description);
+                              } else {
+                                $("#examples-Organizations-getOrganizationsList-title-400").text("Status: 400 - " + responseOrganizations400_description.substring(0, responseOrganizations400_description_break));
+                                $("#examples-Organizations-getOrganizationsList-description-400").html(responseOrganizations400_description.substring(responseOrganizations400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-getOrganizationsList-400" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-getOrganizationsList-400-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-getOrganizationsList-400-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-getOrganizationsList-400-schema">
+                                  <div id="responses-Organizations-getOrganizationsList-schema-400" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Missing or invalid request parameters.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-getOrganizationsList-400-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-getOrganizationsList-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-getOrganizationsList-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-getOrganizationsList-title-401"></h3>
+                            <p id="examples-Organizations-getOrganizationsList-description-401" class="marked"></p>
+                            <script>
+                              var responseOrganizations401_description = `Access token is missing or invalid.`;
+                              var responseOrganizations401_description_break = responseOrganizations401_description.indexOf('\n');
+                              if (responseOrganizations401_description_break == -1) {
+                                $("#examples-Organizations-getOrganizationsList-title-401").text("Status: 401 - " + responseOrganizations401_description);
+                              } else {
+                                $("#examples-Organizations-getOrganizationsList-title-401").text("Status: 401 - " + responseOrganizations401_description.substring(0, responseOrganizations401_description_break));
+                                $("#examples-Organizations-getOrganizationsList-description-401").html(responseOrganizations401_description.substring(responseOrganizations401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-getOrganizationsList-401" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-getOrganizationsList-401-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-getOrganizationsList-401-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-getOrganizationsList-401-schema">
+                                  <div id="responses-Organizations-getOrganizationsList-schema-401" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Access token is missing or invalid.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-getOrganizationsList-401-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-getOrganizationsList-schema-401');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-getOrganizationsList-401-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-getOrganizationsList-title-500"></h3>
+                            <p id="examples-Organizations-getOrganizationsList-description-500" class="marked"></p>
+                            <script>
+                              var responseOrganizations500_description = `Unexpected server error.`;
+                              var responseOrganizations500_description_break = responseOrganizations500_description.indexOf('\n');
+                              if (responseOrganizations500_description_break == -1) {
+                                $("#examples-Organizations-getOrganizationsList-title-500").text("Status: 500 - " + responseOrganizations500_description);
+                              } else {
+                                $("#examples-Organizations-getOrganizationsList-title-500").text("Status: 500 - " + responseOrganizations500_description.substring(0, responseOrganizations500_description_break));
+                                $("#examples-Organizations-getOrganizationsList-description-500").html(responseOrganizations500_description.substring(responseOrganizations500_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-getOrganizationsList-500" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-getOrganizationsList-500-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-getOrganizationsList-500-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-getOrganizationsList-500-schema">
+                                  <div id="responses-Organizations-getOrganizationsList-schema-500" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Unexpected server error.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-getOrganizationsList-500-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-getOrganizationsList-schema-500');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-getOrganizationsList-500-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
                         </article>
@@ -14757,6 +16587,695 @@ pub fn main() {
                                     </script>
                                   </div>
                                   <input id='responses-Organizations-removeMemberFromOrganization_1-500-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Organizations-updateOrganization">
+                      <article id="api-Organizations-updateOrganization-0" data-group="User" data-name="updateOrganization" data-version="0">
+                        <div class="pull-left">
+                          <h1>updateOrganization</h1>
+                          <p>Update organization (system admin only).</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="put"><code><span class="pln">/organizations/{id}</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Organizations-updateOrganization-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-updateOrganization-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Organizations-updateOrganization-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-python">Python</a></li>
+                          <li class=""><a href="#examples-Organizations-updateOrganization-0-rust">Rust</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Organizations-updateOrganization-0-curl">
+                            <pre class="prettyprint"><code class="language-bsh">curl -X PUT\
+ -H "Authorization: Bearer [[accessToken]]"\
+ -H "Accept: application/json"\
+ -H "Content-Type: application/json"\
+ "https://full.path.to/v3/organizations/{id}"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Organizations-updateOrganization-0-java">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.*;
+import org.openapitools.client.auth.*;
+import org.openapitools.client.model.*;
+import org.openapitools.client.api.OrganizationsApi;
+
+import java.io.File;
+import java.util.*;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        ApiClient defaultClient = Configuration.getDefaultApiClient();
+        
+        // Configure Bearer (JWT) access token for authorization: bearer
+        HttpBearerAuth bearer = (HttpBearerAuth) defaultClient.getAuthentication("bearer");
+        bearer.setBearerToken("BEARER TOKEN");
+        
+        // Create an instance of the API class
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        Integer id = 56; // Integer | Organization ID.
+        OrganizationFormDto organizationFormDto = ; // OrganizationFormDto | 
+        
+        try {
+            OrganizationDto result = apiInstance.updateOrganization(id, organizationFormDto);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#updateOrganization");
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Organizations-updateOrganization-0-android">
+                            <pre class="prettyprint"><code class="language-java">import org.openapitools.client.api.OrganizationsApi;
+
+public class OrganizationsApiExample {
+    public static void main(String[] args) {
+        OrganizationsApi apiInstance = new OrganizationsApi();
+        Integer id = 56; // Integer | Organization ID.
+        OrganizationFormDto organizationFormDto = ; // OrganizationFormDto | 
+        
+        try {
+            OrganizationDto result = apiInstance.updateOrganization(id, organizationFormDto);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling OrganizationsApi#updateOrganization");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Organizations-updateOrganization-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Organizations-updateOrganization-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">Configuration *apiConfig = [Configuration sharedConfig];
+
+// Configure Bearer (JWT) access token for authorization: bearer
+[apiConfig setAccessToken:@"YOUR_ACCESS_TOKEN"];
+
+// Create an instance of the API class
+OrganizationsApi *apiInstance = [[OrganizationsApi alloc] init];
+Integer *id = 56; // Organization ID. (default to null)
+OrganizationFormDto *organizationFormDto = ; // 
+
+// Update organization (system admin only).
+[apiInstance updateOrganizationWith:id
+    organizationFormDto:organizationFormDto
+              completionHandler: ^(OrganizationDto output, NSError* error) {
+    if (output) {
+        NSLog(@"%@", output);
+    }
+    if (error) {
+        NSLog(@"Error: %@", error);
+    }
+}];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-updateOrganization-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var EventurasApi = require('eventuras_api');
+var defaultClient = EventurasApi.ApiClient.instance;
+
+// Configure Bearer (JWT) access token for authorization: bearer
+var bearer = defaultClient.authentications['bearer'];
+bearer.accessToken = "YOUR ACCESS TOKEN";
+
+// Create an instance of the API class
+var api = new EventurasApi.OrganizationsApi()
+var id = 56; // {Integer} Organization ID.
+var organizationFormDto = ; // {OrganizationFormDto} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.updateOrganization(id, organizationFormDto, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Organizations-updateOrganization-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Organizations-updateOrganization-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using Org.OpenAPITools.Api;
+using Org.OpenAPITools.Client;
+using Org.OpenAPITools.Model;
+
+namespace Example
+{
+    public class updateOrganizationExample
+    {
+        public void main()
+        {
+            // Configure Bearer (JWT) access token for authorization: bearer
+            Configuration.Default.AccessToken = "YOUR_ACCESS_TOKEN";
+            
+            // Create an instance of the API class
+            var apiInstance = new OrganizationsApi();
+            var id = 56;  // Integer | Organization ID. (default to null)
+            var organizationFormDto = new OrganizationFormDto(); // OrganizationFormDto | 
+
+            try {
+                // Update organization (system admin only).
+                OrganizationDto result = apiInstance.updateOrganization(id, organizationFormDto);
+                Debug.WriteLine(result);
+            } catch (Exception e) {
+                Debug.Print("Exception when calling OrganizationsApi.updateOrganization: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-updateOrganization-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+// Configure Bearer (JWT) access token for authorization: bearer
+OpenAPITools\Client\Configuration::getDefaultConfiguration()->setAccessToken('', 'YOUR_ACCESS_TOKEN');
+
+// Create an instance of the API class
+$api_instance = new OpenAPITools\Client\Api\OrganizationsApi();
+$id = 56; // Integer | Organization ID.
+$organizationFormDto = ; // OrganizationFormDto | 
+
+try {
+    $result = $api_instance->updateOrganization($id, $organizationFormDto);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling OrganizationsApi->updateOrganization: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-updateOrganization-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::OPenAPIClient::Configuration;
+use WWW::OPenAPIClient::OrganizationsApi;
+
+# Configure Bearer (JWT) access token for authorization: bearer
+$WWW::OPenAPIClient::Configuration::access_token = 'YOUR_ACCESS_TOKEN';
+
+# Create an instance of the API class
+my $api_instance = WWW::OPenAPIClient::OrganizationsApi->new();
+my $id = 56; # Integer | Organization ID.
+my $organizationFormDto = WWW::OPenAPIClient::Object::OrganizationFormDto->new(); # OrganizationFormDto | 
+
+eval { 
+    my $result = $api_instance->updateOrganization(id => $id, organizationFormDto => $organizationFormDto);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling OrganizationsApi->updateOrganization: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-updateOrganization-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import openapi_client
+from openapi_client.rest import ApiException
+from pprint import pprint
+
+# Configure Bearer (JWT) access token for authorization: bearer
+openapi_client.configuration.access_token = 'YOUR_ACCESS_TOKEN'
+
+# Create an instance of the API class
+api_instance = openapi_client.OrganizationsApi()
+id = 56 # Integer | Organization ID. (default to null)
+organizationFormDto =  # OrganizationFormDto | 
+
+try: 
+    # Update organization (system admin only).
+    api_response = api_instance.update_organization(id, organizationFormDto)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling OrganizationsApi->updateOrganization: %s\n" % e)</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Organizations-updateOrganization-0-rust">
+                              <pre class="prettyprint"><code class="language-rust">extern crate OrganizationsApi;
+
+pub fn main() {
+    let id = 56; // Integer
+    let organizationFormDto = ; // OrganizationFormDto
+
+    let mut context = OrganizationsApi::Context::default();
+    let result = client.updateOrganization(id, organizationFormDto, &context).wait();
+
+    println!("{:?}", result);
+}
+</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Scopes</h2>
+                          <table>
+                            
+                          </table>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">id*</td>
+<td>
+
+
+    <div id="d2e199_updateOrganization_id">
+        <div class="json-schema-view">
+            <div class="primitive">
+                <span class="type">
+                    Integer
+                </span>
+                    <span class="format">
+                        (int32)
+                    </span>
+
+                    <div class="inner description marked">
+Organization ID.
+                    </div>
+            </div>
+                <div class="inner required">
+                    Required
+                </div>
+        </div>
+    </div>
+</td>
+</tr>
+
+                            </table>
+
+
+                            <div class="methodsubtabletitle">Body parameters</div>
+                            <table id="methodsubtable">
+                              <tr>
+                                <th width="150px">Name</th>
+                                <th>Description</th>
+                              </tr>
+                                <tr><td style="width:150px;">organizationFormDto <span style="color:red;">*</span></td>
+<td>
+<p class="marked"></p>
+<script>
+$(document).ready(function() {
+  var schemaWrapper = {
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/OrganizationFormDto"
+      }
+    }
+  },
+  "required" : true
+};
+
+  var schema = findNode('schema',schemaWrapper).schema;
+  if (!schema) {
+    schema = schemaWrapper.schema;
+  }
+  if (schema.$ref != null) {
+    schema = defsParser.$refs.get(schema.$ref);
+  } else {
+    schemaWrapper.definitions = Object.assign({}, defs);
+    $RefParser.dereference(schemaWrapper).catch(function(err) {
+      console.log(err);
+    });
+  }
+
+  var view = new JSONSchemaView(schema,2,{isBodyParam: true});
+  var result = $('#d2e199_updateOrganization_organizationFormDto');
+  result.empty();
+  result.append(view.render());
+});
+</script>
+<div id="d2e199_updateOrganization_organizationFormDto"></div>
+</td>
+</tr>
+
+                            </table>
+
+
+
+                          <h2>Responses</h2>
+                            <h3 id="examples-Organizations-updateOrganization-title-200"></h3>
+                            <p id="examples-Organizations-updateOrganization-description-200" class="marked"></p>
+                            <script>
+                              var responseOrganizations200_description = `Registration updated.`;
+                              var responseOrganizations200_description_break = responseOrganizations200_description.indexOf('\n');
+                              if (responseOrganizations200_description_break == -1) {
+                                $("#examples-Organizations-updateOrganization-title-200").text("Status: 200 - " + responseOrganizations200_description);
+                              } else {
+                                $("#examples-Organizations-updateOrganization-title-200").text("Status: 200 - " + responseOrganizations200_description.substring(0, responseOrganizations200_description_break));
+                                $("#examples-Organizations-updateOrganization-description-200").html(responseOrganizations200_description.substring(responseOrganizations200_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-updateOrganization-200" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-updateOrganization-200-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-updateOrganization-200-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-updateOrganization-200-schema">
+                                  <div id="responses-Organizations-updateOrganization-schema-200" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Registration updated.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/OrganizationDto"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-updateOrganization-200-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-updateOrganization-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-updateOrganization-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-updateOrganization-title-401"></h3>
+                            <p id="examples-Organizations-updateOrganization-description-401" class="marked"></p>
+                            <script>
+                              var responseOrganizations401_description = `Access token is missing or invalid.`;
+                              var responseOrganizations401_description_break = responseOrganizations401_description.indexOf('\n');
+                              if (responseOrganizations401_description_break == -1) {
+                                $("#examples-Organizations-updateOrganization-title-401").text("Status: 401 - " + responseOrganizations401_description);
+                              } else {
+                                $("#examples-Organizations-updateOrganization-title-401").text("Status: 401 - " + responseOrganizations401_description.substring(0, responseOrganizations401_description_break));
+                                $("#examples-Organizations-updateOrganization-description-401").html(responseOrganizations401_description.substring(responseOrganizations401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-updateOrganization-401" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-updateOrganization-401-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-updateOrganization-401-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-updateOrganization-401-schema">
+                                  <div id="responses-Organizations-updateOrganization-schema-401" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Access token is missing or invalid.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-updateOrganization-401-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-updateOrganization-schema-401');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-updateOrganization-401-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-updateOrganization-title-403"></h3>
+                            <p id="examples-Organizations-updateOrganization-description-403" class="marked"></p>
+                            <script>
+                              var responseOrganizations403_description = `Access forbidden.`;
+                              var responseOrganizations403_description_break = responseOrganizations403_description.indexOf('\n');
+                              if (responseOrganizations403_description_break == -1) {
+                                $("#examples-Organizations-updateOrganization-title-403").text("Status: 403 - " + responseOrganizations403_description);
+                              } else {
+                                $("#examples-Organizations-updateOrganization-title-403").text("Status: 403 - " + responseOrganizations403_description.substring(0, responseOrganizations403_description_break));
+                                $("#examples-Organizations-updateOrganization-description-403").html(responseOrganizations403_description.substring(responseOrganizations403_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-updateOrganization-403" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-updateOrganization-403-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-updateOrganization-403-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-updateOrganization-403-schema">
+                                  <div id="responses-Organizations-updateOrganization-schema-403" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Access forbidden.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-updateOrganization-403-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-updateOrganization-schema-403');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-updateOrganization-403-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-updateOrganization-title-404"></h3>
+                            <p id="examples-Organizations-updateOrganization-description-404" class="marked"></p>
+                            <script>
+                              var responseOrganizations404_description = `The requested resource not found.`;
+                              var responseOrganizations404_description_break = responseOrganizations404_description.indexOf('\n');
+                              if (responseOrganizations404_description_break == -1) {
+                                $("#examples-Organizations-updateOrganization-title-404").text("Status: 404 - " + responseOrganizations404_description);
+                              } else {
+                                $("#examples-Organizations-updateOrganization-title-404").text("Status: 404 - " + responseOrganizations404_description.substring(0, responseOrganizations404_description_break));
+                                $("#examples-Organizations-updateOrganization-description-404").html(responseOrganizations404_description.substring(responseOrganizations404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-updateOrganization-404" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-updateOrganization-404-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-updateOrganization-404-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-updateOrganization-404-schema">
+                                  <div id="responses-Organizations-updateOrganization-schema-404" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "The requested resource not found.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-updateOrganization-404-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-updateOrganization-schema-404');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-updateOrganization-404-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-Organizations-updateOrganization-title-500"></h3>
+                            <p id="examples-Organizations-updateOrganization-description-500" class="marked"></p>
+                            <script>
+                              var responseOrganizations500_description = `Unexpected server error.`;
+                              var responseOrganizations500_description_break = responseOrganizations500_description.indexOf('\n');
+                              if (responseOrganizations500_description_break == -1) {
+                                $("#examples-Organizations-updateOrganization-title-500").text("Status: 500 - " + responseOrganizations500_description);
+                              } else {
+                                $("#examples-Organizations-updateOrganization-title-500").text("Status: 500 - " + responseOrganizations500_description.substring(0, responseOrganizations500_description_break));
+                                $("#examples-Organizations-updateOrganization-description-500").html(responseOrganizations500_description.substring(responseOrganizations500_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-Organizations-updateOrganization-500" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-Organizations-updateOrganization-500-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-Organizations-updateOrganization-500-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-Organizations-updateOrganization-500-schema">
+                                  <div id="responses-Organizations-updateOrganization-schema-500" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Unexpected server error.",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Error"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-Organizations-updateOrganization-500-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-Organizations-updateOrganization-schema-500');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-Organizations-updateOrganization-500-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
                         </article>

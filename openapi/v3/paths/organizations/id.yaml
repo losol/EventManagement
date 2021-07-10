@@ -1,0 +1,59 @@
+put:
+  summary: Update organization (system admin only).
+  operationId: updateOrganization
+  tags:
+    - organizations
+  parameters:
+    - name: id
+      in: path
+      description: Organization ID.
+      required: true
+      schema:
+        type: integer
+        format: int32
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '../../schemas/organizations/OrganizationFormDto.yaml'
+  responses:
+    '200':
+      description: Registration updated.
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/organizations/OrganizationDto.yaml'
+    '401':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/UnauthorizedError'
+    '403':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/ForbiddenError'
+    '404':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/NotFound'
+    '500':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/InternalServerError'
+
+delete:
+  summary: Delete organization (system admin only).
+  operationId: deleteOrganization
+  tags:
+    - organizations
+  parameters:
+    - name: id
+      in: path
+      description: Organization ID.
+      required: true
+      schema:
+        type: integer
+        format: int32
+  responses:
+    '200':
+      description: Organization deleted.
+    '401':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/UnauthorizedError'
+    '403':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/ForbiddenError'
+    '404':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/NotFound'
+    '500':
+      $ref: 'eventuras-api.v3.yaml#/components/responses/InternalServerError'

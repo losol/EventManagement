@@ -1,0 +1,25 @@
+type: object
+title: Organization properties.
+required:
+  - name
+properties:
+  organizationId:
+    type: integer
+    format: int32
+    description: Organization ID.
+  name:
+    type: string
+  description:
+    type: string
+  url:
+    type: string
+  phone:
+    type: string
+  email:
+    type: string
+  logoUrl:
+    type: string
+  løogoBase64:
+    type: string
+example:
+  name: 'Test org'

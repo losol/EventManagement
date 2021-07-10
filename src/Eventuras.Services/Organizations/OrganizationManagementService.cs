@@ -142,6 +142,11 @@ namespace Eventuras.Services.Organizations
                                    .SingleOrDefaultAsync(o => o.OrganizationId == id)
                                ?? throw new NotFoundException($"Organization {id} not found");
 
+            if (!organization.Active)
+            {
+                return; // already deleted
+            }
+
             organization.Active = false;
             organization.Hostnames.ForEach(h => h.Active = false);
 

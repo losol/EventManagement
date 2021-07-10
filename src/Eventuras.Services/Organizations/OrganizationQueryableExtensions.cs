@@ -1,15 +1,15 @@
 using System;
-using Eventuras.Domain;
-using Eventuras.Services.Auth;
 using System.Linq;
 using System.Security.Claims;
+using Eventuras.Domain;
+using Eventuras.Services.Auth;
 using Microsoft.EntityFrameworkCore;
 
 namespace Eventuras.Services.Organizations
 {
     internal static class OrganizationQueryableExtensions
     {
-        public static IQueryable<Organization> UseFilter(this IQueryable<Organization> query, OrganizationFilter filter)
+        public static IQueryable<Organization> AddFilter(this IQueryable<Organization> query, OrganizationFilter filter)
         {
             if (filter == null)
                 throw new ArgumentNullException(nameof(filter));
@@ -26,7 +26,7 @@ namespace Eventuras.Services.Organizations
             return query;
         }
 
-        public static IQueryable<Organization> UseOptions(this IQueryable<Organization> query,
+        public static IQueryable<Organization> WithOptions(this IQueryable<Organization> query,
             OrganizationRetrievalOptions options)
         {
             if (options == null)
@@ -46,6 +46,23 @@ namespace Eventuras.Services.Organizations
             if (options.LoadSettings)
             {
                 query = query.Include(o => o.Settings);
+            }
+
+            return query;
+        }
+
+        public static IQueryable<Organization> AddOrder(
+            this IQueryable<Organization> query,
+            OrganizationListOrder order,
+            bool descending = false)
+        {
+            switch (order)
+            {
+                case OrganizationListOrder.Name:
+                    query = descending
+                        ? query.OrderByDescending(o => o.Name)
+                        : query.OrderBy(o => o.Name);
+                    break;
             }
 
             return query;

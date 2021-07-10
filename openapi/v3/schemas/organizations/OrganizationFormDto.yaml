@@ -1,0 +1,21 @@
+type: object
+title: Organization data.
+required:
+  - name
+properties:
+  name:
+    type: string
+  description:
+    type: string
+  url:
+    type: string
+  phone:
+    type: string
+  email:
+    type: string
+  logoUrl:
+    type: string
+  løogoBase64:
+    type: string
+example:
+  name: 'Test org'

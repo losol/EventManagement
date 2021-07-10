@@ -54,6 +54,12 @@ paths:
   /events/{id}/products/{productId}/variants/{variantId}:
     $ref: './paths/events/products/variants/id.yaml'
 
+  # Organizations
+  /organizations:
+    $ref: './paths/organizations.yaml'
+  /organizations/{id}:
+    $ref: './paths/organizations/id.yaml'
+
   # Organization members
   /organizations/{id}/members:
     $ref: './paths/organizations/members.yaml'

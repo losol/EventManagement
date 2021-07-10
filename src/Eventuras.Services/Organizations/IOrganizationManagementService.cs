@@ -26,6 +26,7 @@ namespace Eventuras.Services.Organizations
         /// <exception cref="Exceptions.NotAccessibleException">Can't update this organization.</exception>
         Task UpdateOrganizationHostnames(int id, string[] hostnames);
 
+        /// <exception cref="Exceptions.NotFoundException">Organization not found.</exception>
         /// <exception cref="Exceptions.NotAccessibleException">Can't delete this organization.</exception>
         Task DeleteOrganizationAsync(int id);
     }

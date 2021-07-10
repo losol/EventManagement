@@ -106,6 +106,18 @@ namespace Eventuras.WebApi.Tests
             Assert.Equal(productVariant.VatPercent, token.Value<int>("vatPercent"));
         }
 
+        public static void CheckOrganization(this JToken token, Organization organization)
+        {
+            Assert.Equal(organization.OrganizationId, token.Value<int>("organizationId"));
+            Assert.Equal(organization.Name, token.Value<string>("name"));
+            Assert.Equal(organization.Description, token.Value<string>("description"));
+            Assert.Equal(organization.Url, token.Value<string>("url"));
+            Assert.Equal(organization.Phone, token.Value<string>("phone"));
+            Assert.Equal(organization.Email, token.Value<string>("email"));
+            Assert.Equal(organization.LogoUrl, token.Value<string>("logoUrl"));
+            Assert.Equal(organization.LogoBase64, token.Value<string>("logoBase64"));
+        }
+
         public static void CheckStringArray(this JArray array, params string[] roles)
         {
             array.CheckArray((t, r) => Assert.Equal(r, t.ToString()), roles);

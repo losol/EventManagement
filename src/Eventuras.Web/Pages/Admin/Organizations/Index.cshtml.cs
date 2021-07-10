@@ -1,9 +1,9 @@
-using Eventuras.Domain;
-using Eventuras.Services.Organizations;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Eventuras.Domain;
+using Eventuras.Services.Organizations;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Eventuras.Web.Pages.Admin.Organizations
 {
@@ -13,14 +13,15 @@ namespace Eventuras.Web.Pages.Admin.Organizations
 
         public IndexModel(IOrganizationRetrievalService organizationRetrievalService)
         {
-            _organizationRetrievalService = organizationRetrievalService ?? throw new ArgumentNullException(nameof(organizationRetrievalService));
+            _organizationRetrievalService = organizationRetrievalService ??
+                                            throw new ArgumentNullException(nameof(organizationRetrievalService));
         }
 
         public IList<Organization> Organizations { get; set; }
 
         public async Task OnGetAsync()
         {
-            Organizations = await _organizationRetrievalService.ListOrganizationsAsync();
+            Organizations = await _organizationRetrievalService.ListOrganizationsAsync(new OrganizationListRequest());
         }
     }
 }

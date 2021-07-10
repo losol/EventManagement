@@ -1,8 +1,8 @@
-using Eventuras.Domain;
-using Microsoft.AspNetCore.Identity;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Eventuras.Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Eventuras.TestAbstractions
 {
@@ -335,7 +335,8 @@ namespace Eventuras.TestAbstractions
             this TestServiceScope scope,
             string name = TestingConstants.Placeholder,
             string hostname = null,
-            string[] hostnames = null)
+            string[] hostnames = null,
+            bool inactive = false)
         {
             if (name == TestingConstants.Placeholder)
             {
@@ -350,10 +351,11 @@ namespace Eventuras.TestAbstractions
             var org = new Organization
             {
                 Name = name,
+                Active = !inactive,
                 Hostnames = hostnames?.Select(h => new OrganizationHostname
                 {
                     Hostname = h,
-                    Active = true
+                    Active = !inactive
                 }).ToList()
             };
 

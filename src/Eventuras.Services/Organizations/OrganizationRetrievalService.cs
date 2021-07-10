@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Eventuras.Domain;
 using Eventuras.Infrastructure;
+using Eventuras.Services.Auth;
 using Eventuras.Services.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,7 @@ namespace Eventuras.Services.Organizations
         }
 
         public async Task<List<Organization>> ListOrganizationsAsync(
+            OrganizationListRequest request,
             OrganizationFilter filter,
             OrganizationRetrievalOptions options,
             CancellationToken cancellationToken)
@@ -44,14 +46,15 @@ namespace Eventuras.Services.Organizations
             }
 
             var query = _context.Organizations.AsNoTracking();
-            if (!user.IsInRole(Roles.SuperAdmin)) // Super admin can see all orgs.
+            if (!user.IsPowerAdmin()) // Power admin can see all orgs.
             {
                 query = query.HasOrganizationMember(user);
             }
 
             return await query
-                .UseFilter(filter ?? new OrganizationFilter())
-                .UseOptions(options ?? new OrganizationRetrievalOptions())
+                .AddFilter(filter ?? new OrganizationFilter())
+                .AddOrder(request.OrderBy, request.Descending)
+                .WithOptions(options ?? new OrganizationRetrievalOptions())
                 .ToListAsync(cancellationToken);
         }
 
@@ -67,10 +70,10 @@ namespace Eventuras.Services.Organizations
                 .Where(m => m.OrganizationId == id);
 
             var org = await query
-                .UseOptions(options)
+                .WithOptions(options)
                 .FirstOrDefaultAsync(cancellationToken);
 
-            if (org == null)
+            if (org == null || !org.Active)
             {
                 throw new NotFoundException($"Organization {id} not found");
             }
